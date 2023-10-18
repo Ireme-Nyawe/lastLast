@@ -27,3 +27,23 @@ export const createPost = async(req,res) =>{
         })
     }
 }
+
+// view all posts
+export const viewPosts = async (req,res) =>{
+    try {
+      const posts = await postModel.find();
+      return res.status(200).json({
+        status : "200",
+        message : "All Posts Retrieved, Check Below:",
+        data : posts,
+      })
+    } catch (error) {
+      return res.status(500).json({
+        statusbar: "500",
+        message: "Failed To Retrieve Posts",
+        error: error.message,
+  
+      });
+      
+    }
+  };
