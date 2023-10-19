@@ -20,7 +20,7 @@ const options = {
         },
         
         servers :[{
-            url: 'http://localhost:4600',
+            url: 'https://lastlast.onrender.com',
         }],
         security: [
             {
