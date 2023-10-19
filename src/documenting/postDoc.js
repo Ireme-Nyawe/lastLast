@@ -6,19 +6,24 @@
  *     tags: [Post-Model]
  *     requestBody:
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
+ *               image:
+ *                 type: string
+ *                 format: binary 
  *               title:
+ *                 type: string
+ *               category:
  *                 type: string
  *               description:
  *                 type: string
  *     responses:
  *       200:
- *         description: Good job, Blog Created Successfully.
+ *         description: Good job, Post Created Successfully.
  *       500:
- *         description: Blog Creation Failed.
+ *         description: Post Creation Failed.
  * 
  * /api/post/posts:
  *   get:
@@ -29,4 +34,23 @@
  *         description: Available Posts Retrieved.
  *       500:
  *         description: Failed to retrieve Available Posts.
+ * 
+ * /api/post/one/{id}:
+ *   get:
+ *     summary: View Specific Post.
+ *     tags: [Post-Model]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID Of Post To View.
+ *     responses:
+ *       200:
+ *         description: A Given Post Retrived Successfully.
+ *       404:
+ *         description: ID Specified Do Not Correspond To Any Post.
+ *       500:
+ *         description: Failed to retrieve A Post.
  */

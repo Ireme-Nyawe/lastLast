@@ -5,6 +5,8 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 // import routes
 import postRoute from "./routes/postRoutes";
+import routeUser from "./routes/userRoutes";
+import routeComment from "./routes/commentRoute";
 // 
 
 const app = express();
@@ -53,9 +55,11 @@ app.get("/",(req,res) =>{
     });
 // using created routes
 app.use("/documenting/",swaggerUi.serve,swaggerUi.setup(swaggerSpec))
-app.use("/api/post",postRoute);
+app.use("/api/post/",postRoute);
+app.use("/api/users/",routeUser)
+app.use("/api/commenting/",routeComment);
 
-    export default app;
+export default app;
 
 
 
