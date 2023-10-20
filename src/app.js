@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import cors from "cors";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 // import routes
@@ -10,15 +11,6 @@ import routeComment from "./routes/commentRoute";
 // 
 
 const app = express();
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin','http://localhost:3000');
-  res.header('Access-Control-Allow-Origin','http://localhost:5173');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
-
 const options = {
     definition : {
         openapi : '3.0.0',
@@ -52,7 +44,9 @@ const swaggerSpec = swaggerJSDoc(options)
 
 dotenv.config();
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({extended:false}));
+app.use(cors());
 
 app.get("/",(req,res) =>{
     return res.status(200).json({
