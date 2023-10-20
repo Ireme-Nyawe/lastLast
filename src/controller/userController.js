@@ -25,7 +25,7 @@ export const createAccount = async (req,res) =>{
         });
       }
 
-      const validatePassword = /^(?=.*[A-Za-z])(?=.*\d)[a-z\A-Zd]{6,}$/;
+      const validatePassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
       if (!validatePassword.test(password)) {
           return res.status(400).json({
               status: "400",

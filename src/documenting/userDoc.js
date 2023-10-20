@@ -20,7 +20,7 @@
  *                 type: string
  *               profile:
  *                 type: string
- *                 format: string
+ *                 format: binary
  *     responses:
  *       200:
  *         description: Good job, Account Created Successfully.
