@@ -91,3 +91,5 @@ export const retrievePost = async (req, res) => {
   }
 };
 
+// Update post
+
