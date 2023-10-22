@@ -15,6 +15,8 @@
  *                 format: binary 
  *               title:
  *                 type: string
+ *               header:
+ *                 type: string
  *               category:
  *                 type: string
  *               description:
