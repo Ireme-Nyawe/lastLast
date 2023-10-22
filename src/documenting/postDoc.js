@@ -2,7 +2,7 @@
  *  @swagger
  * /api/post/create/:
  *   post:
- *     summary: Account Creation For New User.
+ *     summary: Create New Blog  Post.
  *     tags: [Post-Model]
  *     requestBody:
  *       content:
