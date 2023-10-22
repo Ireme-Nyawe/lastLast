@@ -1,8 +1,8 @@
 /**
  *  @swagger
- * /api/post/create:
+ * /api/post/create/:
  *   post:
- *     summary: New Blog Creation.
+ *     summary: Account Creation For New User.
  *     tags: [Post-Model]
  *     requestBody:
  *       content:
@@ -12,7 +12,7 @@
  *             properties:
  *               image:
  *                 type: string
- *                 format: binary 
+ *                 format: binary
  *               title:
  *                 type: string
  *               header:
@@ -23,7 +23,7 @@
  *                 type: string
  *     responses:
  *       200:
- *         description: Good job, Post Created Successfully.
+ *         description: Good job, Pos Created Successfully.
  *       500:
  *         description: Post Creation Failed.
  * 
