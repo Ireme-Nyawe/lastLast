@@ -5,7 +5,7 @@ import { uploadToCloud } from "../helper/cloud";
 // Create a new post
 export const createPost = async (req, res) => {
   try {
-    const { image, title, category, description } = req.body;
+    const { image, title, header, category, description } = req.body;
 
     const checkTitle = await postModel.findOne({title});
     if(checkTitle) {
@@ -20,12 +20,13 @@ export const createPost = async (req, res) => {
     const post = await postModel.create({
       image : picture?.secure_url || "https://res.cloudinary.com/da12yf0am/image/upload/v1696850499/pbxwlozt1po8vtbwyabc.jpg",
       title,
+      header,
       category,
       description,
       author : req.userModel._id
     });
 
-    // Add the created post to the user's Created_Posts field
+    // Update user with added post
     await userModel.findByIdAndUpdate(req.userModel._id,
       { $push: { posts: post._id } },
       { new: true }
@@ -92,4 +93,60 @@ export const retrievePost = async (req, res) => {
 };
 
 // Update post
+
+export const updatePost = async (req, res) => {
+  try {
+    const {id}=req.params;
+    const { image, title, header, category, description} = req.body;
+    let picture;
+      if(req.file) picture = await uploadToCloud(req.file, res);
+
+    const updatedPost = await postModel.findByIdAndUpdate(id,{
+      image : picture?.secure_url || "https://res.cloudinary.com/da12yf0am/image/upload/v1696850499/pbxwlozt1po8vtbwyabc.jpg",
+      title,
+      header,
+      category,
+      description,
+      author : req.userModel._id
+    });
+    return res.status(201).json({
+      status: "201",
+      message: "Good Job, A Post Updated Succesfully.",
+      data: updatePost,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "500",
+      message: "Error Occured, Failed To Update A Post",
+      error: error.message,
+    });
+  }
+};
+
+//Delete An Existing post
+
+export const deletePost = async(req, res) => {
+  try {
+    const {id} = req.params;
+    const checkId = await postModel.findById(id);
+    if(!checkId){
+      return res.status(404).json({
+        status : "404",
+        message : "Id Do Not Correspond To Any Post!"
+      });
+    }
+    const deletep= await postModel.findByIdAndDelete(id);
+    return res.status(201).json({
+      status : "201",
+      message : "Good Job, Post Deleted Successfully"
+    })
+  } catch (error) {
+    return res.status(500).json({
+      status : "500",
+      message : "Error Occured, Failed To Delete Post!",
+      error : error.message,
+
+    })
+  }
+}
 

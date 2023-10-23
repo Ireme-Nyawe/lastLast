@@ -10,6 +10,11 @@ const postsSchema= new Schema({
         required : true,
 
     },
+    header : {
+        type : String,
+        required : true,
+
+    },
     category : {
         type : String,
         required : true,
