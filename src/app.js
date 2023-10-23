@@ -21,7 +21,6 @@ const options = {
         
         servers :[{
             url: 'https://lastlast.onrender.com/',
-          
         }],
         security: [
             {

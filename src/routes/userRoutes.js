@@ -7,9 +7,9 @@ const routeUser = express.Router();
 
 routeUser.post("/signUp",uploadfile.single("profile"),createAccount);
 routeUser.post("/signIn",uploadfile.single("profile"),signIn);
-routeUser.post("/update",uploadfile.single("profile"),updateUser);
-routeUser.post("/getAllUsers",uploadfile.single("profile"),getAllUsers);
-routeUser.post("/getOneUser",uploadfile.single("profile"),GetOneUser);
-routeUser.post("/delete",uploadfile.single("profile"),deleteUser);
+routeUser.put("/update/:id",uploadfile.single("profile"),updateUser);
+routeUser.get("/getAllUsers",uploadfile.single("profile"),getAllUsers);
+routeUser.get("/getOneUser/:id",uploadfile.single("profile"),GetOneUser);
+routeUser.delete("/delete/:id",uploadfile.single("profile"),deleteUser);
 
 export default routeUser;
