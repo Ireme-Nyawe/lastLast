@@ -34,7 +34,24 @@ export const commenting = async (req, res) => {
     });
   }
 };
-
-// Update comment
+//  comment Viewing
+export const getAllComments = async(req,res) => {
+  try {
+    const comments = await commentModel.find().populate(
+      {path:"user", select: "fname lname email"}   
+    )
+    return res.status(200).json({
+      status: "200",
+      message: "Comments Retrived; Check:",
+      data: comments,
+      });
+  } catch (error) {
+    return res.status(500).json({
+      status: "500",
+      message: "error, occured failed to retrive comments",
+      error: error.message,
+    });
+  }
+}
 
 
