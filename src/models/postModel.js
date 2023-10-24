@@ -23,13 +23,19 @@ const postsSchema= new Schema({
         type : String,
         required : true,
     },
-    author : {
-        type : String,
-        required : true,
-    },
+    author :[{
+        type: Schema.Types.ObjectId,
+        ref: "users" }],
+
+        
     comments :[{
         type: Schema.Types.ObjectId,
         ref: "comments" }],
+
+        views:({
+            type: Number,
+            default: 0,
+        })
 },
 {
     timestamps : true,

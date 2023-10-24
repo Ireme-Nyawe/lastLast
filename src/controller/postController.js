@@ -1,6 +1,7 @@
 import postModel from "../models/postModel";
 import userModel from "../models/userModel";
 import { uploadToCloud } from "../helper/cloud";
+import commentModel from "../models/commentModel";
 
 // Create a new post
 export const createPost = async (req, res) => {
@@ -51,7 +52,7 @@ export const retrievePosts = async (req, res) => {
   try {
     const posts = await postModel.find().populate(
       {path: "comments", populate:({path: "user", select: "fname lname email"})
-      });
+      }).populate({path: "author", select: "fname lname profile"}).populate({path: "author", select: "fname lname profile"});
 
     return res.status(200).json({
       status: "200",
@@ -72,7 +73,13 @@ export const retrievePost = async (req, res) => {
   try {
     const {id} = req.params;
     
-    const post = await postModel.findById(id);
+    const post = await postModel.findById(id).populate(
+      {path: "comments",select: "commentBody", populate:({path: "user", select: "fname lname email"})
+      }).populate({path: "author", select: "fname lname profile"});
+      const addView = await postModel.findByIdAndUpdate(id,
+        {
+          $inc:{views:1,}
+        });
 
     if(!post){
       return res.status(404).json({
@@ -82,7 +89,7 @@ export const retrievePost = async (req, res) => {
     }
     return res.status(200).json({
       status: "200",
-      message: "Post Retrived; Check:",
+      message: "Post Retrieved; Check:",
       data: post,
     });
   } catch (error) {
@@ -138,6 +145,7 @@ export const deletePost = async(req, res) => {
       });
     }
     const deletep= await postModel.findByIdAndDelete(id);
+    const deleteComment = await commentModel.deleteMany({post : id});
     return res.status(201).json({
       status : "201",
       message : "Good Job, Post Deleted Successfully"
