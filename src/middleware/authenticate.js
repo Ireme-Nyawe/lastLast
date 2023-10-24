@@ -1,6 +1,6 @@
 import userModel from "../models/userModel";
 import Jwt from "jsonwebtoken";
-const Authorization = async (req, res, next) => {
+const AdminAuthorization = async (req, res, next) => {
   let token;
 
   try {
@@ -28,10 +28,10 @@ const Authorization = async (req, res, next) => {
       });
     }
 
-    if (logedUser.role !== "user") {
+    if (logedUser.role !== "admin") {
       res.status(404).json({
         status: "404",
-        message: "Only Loged User can do this operation",
+        message: "Only Admin Can Do This Operation",
       });
     } else {
       req.userModel = logedUser;
@@ -46,4 +46,4 @@ const Authorization = async (req, res, next) => {
   }
 };
 
-export default Authorization;
+export default AdminAuthorization;

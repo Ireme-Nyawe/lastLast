@@ -28,10 +28,10 @@ const Authorization = async (req, res, next) => {
       });
     }
 
-    if (logedUser.role !== "admin") {
+    if (logedUser.role !== "user") {
       res.status(404).json({
         status: "404",
-        message: "Only Admin--, Allowed to  do this operation",
+        message: "Only Loged Users Allowed To  Do This Operation",
       });
     } else {
       req.userModel = logedUser;

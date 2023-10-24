@@ -134,14 +134,13 @@ export const signIn = async (req, res) => {
       });
       return res.status(200).json({
         status: "200",
-        message: "Good Job, User Account Updated Successfully; Check Data:",
-        data: editAccount,
+        message: "Good Job, User Account Updated Successfully;",
       });
 
     } catch (error) {
         return res.status(500).json({
             status: "500",
-            message: "Failed To User User Account; Check Back!",
+            message: "Failed To UpdateUser Account; Check Back!",
             error:error.message,
         });
     }

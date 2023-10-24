@@ -49,7 +49,9 @@ export const createPost = async (req, res) => {
 // retrieve posts
 export const retrievePosts = async (req, res) => {
   try {
-    const posts = await postModel.find();
+    const posts = await postModel.find().populate(
+      {path: "comments", populate:({path: "user", select: "fname lname email"})
+      });
 
     return res.status(200).json({
       status: "200",
