@@ -17,7 +17,7 @@
  *           schema:
  *             type: object
  *             properties:
- *               CommentBody:
+ *               commentBody:
  *                 type: string
  *     responses:
  *       200:
@@ -26,5 +26,15 @@
  *         description: No Post Available!.
  *       500:
  *         description: Failed To Retrive A Given Post!
+ * 
+ * /api/commenting/comments/:
+ *   get:
+ *     summary: Viewing All comments in General.
+ *     tags: [Comment-Model]
+ *     responses:
+ *       200:
+ *         description: Available Coments Retrieved.
+ *       500:
+ *         description: Failed to retrieve Available comments.
  * 
  */
