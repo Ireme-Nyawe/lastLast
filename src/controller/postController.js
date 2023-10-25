@@ -100,7 +100,6 @@ export const retrievePost = async (req, res) => {
     });
   }
 };
-
 // retrieve posts respective to Admin
 export const getAdminPosts = async (req, res) => {
   try {
