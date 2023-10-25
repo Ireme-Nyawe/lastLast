@@ -3,11 +3,11 @@ import mongoose, { Schema } from "mongoose";
 // creating Model For Users
 
 const usersSchema = new Schema({
-    fname: {
+    firstname: {
         type: String,
         require: true
     },
-    lname: {
+    lastname: {
         type: String,
         require: true
     },
