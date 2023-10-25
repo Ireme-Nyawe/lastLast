@@ -101,6 +101,25 @@ export const retrievePost = async (req, res) => {
   }
 };
 
+// retrieve posts respective to Admin
+export const getAdminPosts = async (req, res) => {
+  try {
+    const posts = await postModel.find({"author": req.userModel.id});
+
+    return res.status(200).json({
+      status: "200",
+      message: "Your Posts Retrieved; Check:",
+      data: posts,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "500",
+      message: "error, occured failed to retrive your Posts",
+      error: error.message,
+    });
+  }
+};
+
 // Update post
 
 export const updatePost = async (req, res) => {
