@@ -37,6 +37,16 @@
  *       500:
  *         description: Failed to retrieve Available Posts.
  * 
+ * /api/post/adminPosts:
+ *   get:
+ *     summary: Posts Respective To Author.
+ *     tags: [Post-Model]
+ *     responses:
+ *       200:
+ *         description: Your Posts Retrieved.
+ *       500:
+ *         description: Failed to retrieve Your Posts.
+ * 
  * /api/post/one/{id}:
  *   get:
  *     summary: View Specific Post.
