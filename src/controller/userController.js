@@ -8,7 +8,7 @@ import userModel from "../models/userModel";
 
 export const createAccount = async (req,res) =>{
     try {
-        const {fname, lname,email,password,profile} = req.body;
+        const {firstname, lastname,email,password,profile} = req.body;
 
         const validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!validateEmail.test(email)) {
