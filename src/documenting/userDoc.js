@@ -10,9 +10,9 @@
  *           schema:
  *             type: object
  *             properties:
- *               fname:
+ *               firstname:
  *                 type: string
- *               lname:
+ *               lastname:
  *                 type: string
  *               email:
  *                 type: string
