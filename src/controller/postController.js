@@ -20,6 +20,8 @@ export const createPost = async (req, res) => {
 
     const post = await postModel.create({
       image : picture?.secure_url,
+      title,
+      header,
       category,
       description,
       author : req.userModel._id
