@@ -23,9 +23,9 @@ const postsSchema= new Schema({
         type : String,
         required : true,
     },
-    author :[{
+    author :{
         type: Schema.Types.ObjectId,
-        ref: "users" }],
+        ref: "users" },
 
         
     comments :[{

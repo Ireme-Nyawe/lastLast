@@ -19,9 +19,7 @@ export const createPost = async (req, res) => {
       if(req.file) picture = await uploadToCloud(req.file, res);
 
     const post = await postModel.create({
-      image : picture?.secure_url || "https://res.cloudinary.com/da12yf0am/image/upload/v1696850499/pbxwlozt1po8vtbwyabc.jpg",
-      title,
-      header,
+      image : picture?.secure_url,
       category,
       description,
       author : req.userModel._id
@@ -51,18 +49,18 @@ export const createPost = async (req, res) => {
 export const retrievePosts = async (req, res) => {
   try {
     const posts = await postModel.find().populate(
-      {path: "comments", populate:({path: "user", select: "fname lname email"})
-      }).populate({path: "author", select: "fname lname profile"}).populate({path: "author", select: "fname lname profile"});
+      {path: "comments", populate:({path: "user", select: "firstname lastname email"})
+      }).populate({path: "author", select: "firstname lastname profile"});
 
     return res.status(200).json({
       status: "200",
-      message: "Posts Retrived; Check:",
+      message: "Posts Retrieved; Check:",
       data: posts,
     });
   } catch (error) {
     return res.status(500).json({
       status: "500",
-      message: "error, occured faided to retrive posts",
+      message: "error, occured failed to retrieve posts",
       error: error.message,
     });
   }
@@ -74,8 +72,8 @@ export const retrievePost = async (req, res) => {
     const {id} = req.params;
     
     const post = await postModel.findById(id).populate(
-      {path: "comments",select: "commentBody", populate:({path: "user", select: "fname lname email"})
-      }).populate({path: "author", select: "fname lname profile"});
+      {path: "comments",select: "commentBody", populate:({path: "user", select: "firstname lastname email"})
+      }).populate({path: "author", select: "firstname lastname profile"});
       const addView = await postModel.findByIdAndUpdate(id,
         {
           $inc:{views:1,}
@@ -95,7 +93,7 @@ export const retrievePost = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       status: "500",
-      message: "error, occured faided to retrive posts",
+      message: "error, occured failed to retrieve posts",
       error: error.message,
     });
   }
@@ -103,7 +101,9 @@ export const retrievePost = async (req, res) => {
 // retrieve posts respective to Admin
 export const getAdminPosts = async (req, res) => {
   try {
-    const posts = await postModel.find({"author": req.userModel.id});
+    const posts = await postModel.find({"author": req.userModel.id}).populate(
+      {path: "comments", populate:({path: "user", select: "firstname lastname email"})
+      }).populate({path: "author", select: "firstname lastname profile"});
 
     return res.status(200).json({
       status: "200",
@@ -113,7 +113,7 @@ export const getAdminPosts = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       status: "500",
-      message: "error, occured failed to retrive your Posts",
+      message: "error, occured failed to retrieve your Posts",
       error: error.message,
     });
   }
