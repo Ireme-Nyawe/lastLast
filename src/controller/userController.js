@@ -42,7 +42,7 @@ export const createAccount = async (req,res) =>{
           lastname,
           email,
           password: hashedpass,
-          Profile: userProf?.secure_url || "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fimage&psig=AOvVaw2D5cL1VMoUWovvU-4BPSbv&ust=1697791350541000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCMDA_uXbgYIDFQAAAAAdAAAAABAE",
+          profile: userProf?.secure_url,
       });
       return res.status(200).json({
         status: "200",
