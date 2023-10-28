@@ -51,8 +51,8 @@ export const createPost = async (req, res) => {
 export const retrievePosts = async (req, res) => {
   try {
     const posts = await postModel.find().populate(
-      {path: "comments", populate:({path: "user", select: "firstname lastname email"})
-      }).populate({path: "author", select: "firstname lastname profile"});
+      {path: "comments", populate:({path: "user", select: "firstname lastname email profile"})
+      }).populate({path: "author", select: "firstname lastname email profile"});
 
     return res.status(200).json({
       status: "200",
@@ -74,8 +74,8 @@ export const retrievePost = async (req, res) => {
     const {id} = req.params;
     
     const post = await postModel.findById(id).populate(
-      {path: "comments",select: "commentBody", populate:({path: "user", select: "firstname lastname email"})
-      }).populate({path: "author", select: "firstname lastname profile"});
+      {path: "comments",select: "commentBody", populate:({path: "user", select: "firstname lastname email profile"})
+      }).populate({path: "author", select: "firstname lastname email profile"});
       const addView = await postModel.findByIdAndUpdate(id,
         {
           $inc:{views:1,}
