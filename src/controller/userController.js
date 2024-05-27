@@ -1,6 +1,3 @@
-import usersModel from "../models/userModel";
-import postModel from "../models/postModel";
-import commentModel from "../models/commentModel";
 import { uploadToCloud } from "../helper/cloud";
 import Jwt from "jsonwebtoken";
 import bcrypt, {genSalt, hash} from "bcrypt";

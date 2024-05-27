@@ -5,6 +5,7 @@ import { commenting, getAllComments } from "../controller/commentController";
 import Authorization from "../middleware/authenticateUser";
 import AdminAuthorization from "../middleware/authenticate";
 
+
 const routeComment = express.Router();
 
 //set endpoints
